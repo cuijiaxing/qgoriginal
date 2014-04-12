@@ -20,17 +20,20 @@ public class NERQuestionGenerator {
 		for(int i = 0; i < rules.length; ++i){
 			if(sentence.startsWith(rules[i])){
 				result = replace(sentence);
-				break;
+				return new EnhancedQuestion(result, "No");
 			}
 		}
-		return new EnhancedQuestion(result, "False");
+		return null;
+		
 	}
 	
 	public List<Question> generateNERQuestion(List<Question> questionList){
 		List<Question> generatedList = new ArrayList<Question>();
 		for(int i = 0; i < questionList.size(); ++i){
 			EnhancedQuestion q = generateNERQuestion(questionList.get(i).yield());
-			generatedList.add(q);
+			if(q != null){
+				generatedList.add(q);
+			}
 		}
 		
 		
