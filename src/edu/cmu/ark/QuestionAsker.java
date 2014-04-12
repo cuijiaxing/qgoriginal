@@ -29,8 +29,7 @@ import java.io.*;
 //import java.text.NumberFormat;
 import java.util.*;
 
-//import weka.classifiers.functions.LinearRegression;
-
+import edu.cmu.ravio.EnhancedQuestionGenerator;
 //import edu.cmu.ark.ranking.WekaLinearRegressionRanker;
 import edu.stanford.nlp.trees.Tree;
 
@@ -173,6 +172,9 @@ public class QuestionAsker {
 					List<Tree> inputTrees = new ArrayList<Tree>();
 					List<String> sentences = new ArrayList<String>();
 					sentences.add(singleSentence);
+					/*********************key step to generate because question***********************************/
+					EnhancedQuestionGenerator whyGenerator = new EnhancedQuestionGenerator();
+					sentences.add(whyGenerator.extractBecause(sentences.get(0)));
 					
 					for(String sentence: sentences){
 						if(GlobalProperties.getDebug()) System.err.println("Question Asker: sentence: "+sentence);
@@ -204,24 +206,24 @@ public class QuestionAsker {
 						QuestionRanker.sortQuestions(outputQuestionList, false);
 					}
 					
+					outputQuestionList = whyGenerator.selectQuestion(outputQuestionList);
+					
 					//now print the questions
 					//double featureValue;
 					for(Question question: outputQuestionList){
-						if(question.getTree().getLeaves().size() > maxLength){
+						if(question.getTree() != null && question.getTree().getLeaves().size() > maxLength){
 							continue;
 						}
 						if(justWH && question.getFeatureValue("whQuestion") != 1.0){
 							continue;
 						}
-						System.out.print(question.yield());
-						if(printVerbose) System.out.print("\t"+AnalysisUtilities.getCleanedUpYield(question.getSourceTree()));
+						System.out.print(question.yield() + "\t");
 						Tree ansTree = question.getAnswerPhraseTree();
-						if(printVerbose) System.out.print("\t");
 						if(ansTree != null){
-							if(printVerbose) System.out.print(AnalysisUtilities.getCleanedUpYield(question.getAnswerPhraseTree()));
+							System.out.print(AnalysisUtilities.getCleanedUpYield(question.getAnswerPhraseTree()));
+						}else{
+							System.out.print(question.toString());
 						}
-						if(printVerbose) System.out.print("\t"+question.getScore());
-						//System.err.println("Answer depth: "+question.getFeatureValue("answerDepth"));
 						
 						System.out.println();
 					}

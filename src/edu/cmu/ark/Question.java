@@ -88,11 +88,9 @@ public class Question implements Comparable<Question>, Serializable{
 		
 		if(tree != null) res += tree.yield().toString();
 		res += "\t";
-		if(intermediateTree != null) res += "Intermediate:"+intermediateTree.yield().toString();
-		res += "\t";
-		if(sourceTree != null) res += "Source:"+sourceTree.yield().toString();
-		
-		
+		//if(intermediateTree != null) res += "Intermediate:"+intermediateTree.yield().toString();
+		//res += "\t";
+		//if(sourceTree != null) res += "Source:"+sourceTree.yield().toString();
 		
 		
 		return res;
