@@ -133,7 +133,7 @@ public class QuestionAsker {
 		}
 		
 		try{
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("test1.txt")));
 			
 			if(GlobalProperties.getDebug()) System.err.println("\nInput Text:");
 			String doc;
@@ -232,8 +232,7 @@ public class QuestionAsker {
 				if(GlobalProperties.getDebug()) System.err.println("\nInput Text:");
 			}
 			
-			
-			
+			br.close();
 			
 		}catch(Exception e){
 			e.printStackTrace();
