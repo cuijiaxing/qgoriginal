@@ -30,6 +30,7 @@ import java.io.*;
 import java.util.*;
 
 import edu.cmu.ravio.EnhancedQuestionGenerator;
+import edu.cmu.ravio.NERQuestionGenerator;
 //import edu.cmu.ark.ranking.WekaLinearRegressionRanker;
 import edu.stanford.nlp.trees.Tree;
 
@@ -207,6 +208,12 @@ public class QuestionAsker {
 					}
 					
 					outputQuestionList = whyGenerator.selectQuestion(outputQuestionList);
+					
+					/******if we cannot generate why questions, then try to generate true/false questions**********/
+					if(!whyGenerator.hasGenerated()){
+						NERQuestionGenerator nerGenerator = new NERQuestionGenerator();
+						outputQuestionList = nerGenerator.generateNERQuestion(outputQuestionList);
+					}
 					
 					//now print the questions
 					//double featureValue;
