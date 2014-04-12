@@ -29,6 +29,7 @@ import java.io.*;
 //import java.text.NumberFormat;
 import java.util.*;
 
+import edu.cmu.ravio.EnhancedQuestion;
 import edu.cmu.ravio.EnhancedQuestionGenerator;
 import edu.cmu.ravio.NERQuestionGenerator;
 import edu.cmu.ravio.ner.GlobalNER;
@@ -233,7 +234,11 @@ public class QuestionAsker {
 						if(ansTree != null){
 							System.out.print(AnalysisUtilities.getCleanedUpYield(question.getAnswerPhraseTree()));
 						}else{
-							System.out.print(question.toString());
+							if(question instanceof EnhancedQuestion){
+								System.out.print(question.toString());
+							}else{
+								System.out.print(AnalysisUtilities.getCleanedUpYield(question.getSourceTree()));
+							}
 						}
 						
 						System.out.println();
