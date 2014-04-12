@@ -72,8 +72,22 @@ public class EnhancedQuestionGenerator {
 	 * merge two question list
 	 * */
 	public static List<Question> mergeQuestionList(List<Question> first, List<Question> second){
-		first.addAll(second);
-		return first;
+		//we also have to make sure that there is no duplicate
+		List<Question> resultList = new ArrayList<Question>();
+		resultList.addAll(first);
+		for(int i = 0; i < second.size(); ++i){
+			boolean noDuplicate = true;
+			for(int j = 0;j < first.size(); ++j){
+				if(first.get(j).yield().equals(second.get(i).yield())){
+					noDuplicate = false;
+					break;
+				}
+			}
+			if(noDuplicate){
+				resultList.add(second.get(i));
+			}
+		}
+		return resultList;
 	}
 	
 	/*
