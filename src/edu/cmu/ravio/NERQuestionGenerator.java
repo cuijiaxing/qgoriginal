@@ -20,6 +20,7 @@ public class NERQuestionGenerator {
 		for(int i = 0; i < rules.length; ++i){
 			if(sentence.startsWith(rules[i])){
 				result = replace(sentence);
+				break;
 			}
 		}
 		return new EnhancedQuestion(result, "False");
@@ -58,7 +59,7 @@ public class NERQuestionGenerator {
 					for(int k = 0; k < qNERList.size(); ++k){
 						int temp_index = (q_index + k) % qNERList.size();
 						if(qNERList.get(temp_index).getNer().equals(reservedEntity.get(index).getNer())){
-							question.replace(qNERList.get(temp_index).getText(), reservedEntity.get(index).getText());
+							question = question.replace(qNERList.get(temp_index).getText(), reservedEntity.get(index).getText());
 							return question;
 						}
 					}

@@ -140,7 +140,6 @@ public class QuestionAsker {
 
 			
 			while(true){
-				outputQuestionList.clear();
 				doc = "";
 				buf = "";
 				
@@ -169,6 +168,7 @@ public class QuestionAsker {
 				List<String> sentencesList = AnalysisUtilities.getSentences(doc);
 				
 				for(String singleSentence : sentencesList){
+					outputQuestionList.clear();
 					//iterate over each segmented sentence and generate questions
 					List<Tree> inputTrees = new ArrayList<Tree>();
 					List<String> sentences = new ArrayList<String>();

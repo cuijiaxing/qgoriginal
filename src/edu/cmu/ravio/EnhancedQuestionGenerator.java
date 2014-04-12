@@ -18,7 +18,7 @@ public class EnhancedQuestionGenerator {
 				return extractBecauseSentence(sentence);
 			}else{
 				answer = null;
-				return sentence;
+				return null;
 			}
 	}
 	
