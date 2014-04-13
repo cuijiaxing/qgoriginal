@@ -47,6 +47,11 @@ public class GlobalNER{
 		}
 	}
 	
+	private void getEntities(String doc){
+		NER ner = new NER();
+		entityList.addAll(ner.getEntities(doc));
+	}
+	
 	public static List<Entity> getAllEntities(List<String> sentencesList){
 		if(instance == null){
 			instance = new GlobalNER();
