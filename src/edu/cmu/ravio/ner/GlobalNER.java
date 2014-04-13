@@ -59,6 +59,14 @@ public class GlobalNER{
 		instance.getEntities(sentencesList);
 		return new ArrayList<Entity>(GlobalNER.entityList);
 	}
+	
+	public static List<Entity> getAllEntities(String doc){
+		if(instance == null){
+			instance = new GlobalNER();
+		}
+		instance.getEntities(doc);
+		return new ArrayList<Entity>(GlobalNER.entityList);
+	}
 
 	public static List<Entity> getEntityList() {
 		if(GlobalNER.entityList == null){

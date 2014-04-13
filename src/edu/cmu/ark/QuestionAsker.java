@@ -33,6 +33,7 @@ import edu.cmu.ravio.EnhancedQuestion;
 import edu.cmu.ravio.EnhancedQuestionGenerator;
 import edu.cmu.ravio.NERQuestionGenerator;
 import edu.cmu.ravio.ner.GlobalNER;
+import edu.cmu.ravio.parser.Entity;
 //import edu.cmu.ark.ranking.WekaLinearRegressionRanker;
 import edu.stanford.nlp.trees.Tree;
 
@@ -170,7 +171,12 @@ public class QuestionAsker {
 				List<String> sentencesList = AnalysisUtilities.getSentences(doc);
 				
 				/*************initialize global entity here*****************/
-				GlobalNER.getAllEntities(sentencesList);
+				GlobalNER.getAllEntities(doc);
+				for(Entity e : GlobalNER.getEntityList()){
+					System.out.println(e);
+				}
+				long tempEndtime = System.currentTimeMillis();
+				System.out.println(tempEndtime - startTime);
 				
 				for(String singleSentence : sentencesList){
 					outputQuestionList.clear();

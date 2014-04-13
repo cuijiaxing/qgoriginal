@@ -52,8 +52,16 @@ public class Entity {
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
-		return ner.hashCode() * 10  + text.hashCode();
+		return ner.trim().hashCode() * 10  + text.trim().hashCode();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return this.toString().equals(obj.toString());
+	}
+	
+	
 	
 	
 }
