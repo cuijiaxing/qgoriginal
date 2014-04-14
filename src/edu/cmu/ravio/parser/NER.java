@@ -35,9 +35,4 @@ public class NER {
 		return resultList;
 	}
 	
-	public static void main(String[] args){
-		NER ner = new NER();
-		List<Entity> resultList = ner.getEntities("Washington DC is a great place.");
-		System.out.println(resultList.size());
-	}
 }
