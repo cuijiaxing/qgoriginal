@@ -183,10 +183,13 @@ public class QuestionAsker {
 
 				/************* initialize global entity here *****************/
 				GlobalNER.getAllEntities(doc);
+				
+				/*************************************************************/
 
 				// select twice as many sentences as questions
 				sentencesList = RandomSentenceSelector.selectQuestions(
-						sentencesList, 2 * questionNumber);
+						sentencesList, Math.min(10 * questionNumber, sentencesList.size()));
+				
 
 				for (String singleSentence : sentencesList) {
 					outputQuestionList.clear();
@@ -252,19 +255,39 @@ public class QuestionAsker {
 					 * if we cannot generate why questions, then try to generate
 					 * true/false questions
 					 **********/
-					/*
+					
 					if (!whyGenerator.hasGenerated()) {
 						NERQuestionGenerator nerGenerator = new NERQuestionGenerator();
 						outputQuestionList = nerGenerator
 								.generateNERQuestion(outputQuestionList);
 					}
-					*/
+					
+					
+					Collections.sort(outputQuestionList);
+					Collections.reverse(outputQuestionList);
+					
 					//System.out.println();
+					/*
 					if(outputQuestionList.size() > 0 && selectedQuestionsList.size() < questionNumber){
 						selectedQuestionsList.add(outputQuestionList.get(Math.abs(random.nextInt(outputQuestionList.size()))));
-					}
+					}else
+						if(selectedQuestionsList.size() == questionNumber){
+							break;
+						}
+					*/
+					
+					//add the highest rank one
+					if(outputQuestionList.size() > 0 && selectedQuestionsList.size() < questionNumber){
+						selectedQuestionsList.add(outputQuestionList.get(0));
+					}else
+						if(selectedQuestionsList.size() == questionNumber){
+							break;
+						}
 				}
-
+				
+				
+				
+				
 				// now print the questions
 				// double featureValue;
 				for (Question question : selectedQuestionsList) {
@@ -294,7 +317,6 @@ public class QuestionAsker {
 
 					System.out.println();
 				}
-				
 				
 			}
 

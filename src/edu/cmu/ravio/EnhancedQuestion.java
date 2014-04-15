@@ -75,7 +75,7 @@ public class EnhancedQuestion extends Question{
 				}
 			}
 		}
-		return similarity * 2.0 / (questionWords.length + answerWords.length);
+		return similarity * 2.0 / (questionWords.length + answerWords.length) + 5;
 	}
 	
 

@@ -50,9 +50,6 @@ public class NERQuestionGenerator {
 		NER ner = new NER();
 		List<Entity> qNERList = ner.getEntities(question);
 		List<Entity> reservedEntity = GlobalNER.getEntityList();
-		for(int i = 0; i < reservedEntity.size(); ++i){
-			System.out.println(reservedEntity.get(i));
-		}
 		if(qNERList.size() > 0){
 			Random random = new Random();
 			for(int i = 0; i < reservedEntity.size(); ++i){

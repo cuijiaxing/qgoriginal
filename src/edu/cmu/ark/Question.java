@@ -337,7 +337,11 @@ public class Question implements Comparable<Question>, Serializable{
 	public int compareTo(Question o) {
 		int res = Double.compare(score, o.getScore());
 		if(res == 0){
-			res = Double.compare(o.getSourceSentenceNumber(), score);
+			try{
+				res = Double.compare(this.getSourceSentenceNumber(), o.getSourceSentenceNumber());
+			}catch(Exception e){
+				System.err.println("question compare failed");
+			}
 		}
 		return res;
 	}
